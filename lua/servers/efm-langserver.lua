@@ -34,6 +34,7 @@ return function(on_attach, capabilities)
 			"javascript",
 			"javascriptreact",
 			"json",
+      "java",
 			"jsonc",
 			"lua",
 			"markdown",
@@ -75,6 +76,7 @@ return function(on_attach, capabilities)
 				solidity = { prettier },
 				go = { revive, gofumpt },
 				sh = { shfmt, shellcheck },
+        java = {clang_format},
 			},
 		},
 	})
