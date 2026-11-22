@@ -1,0 +1,6 @@
+require('configs.options')
+require('configs.globals')
+require('configs.keymaps')
+require("configs.autocmds")
+require('configs.lazy')
+pcall(require, "current-theme")
