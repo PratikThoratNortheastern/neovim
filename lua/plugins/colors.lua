@@ -24,6 +24,15 @@ return {
       },
     },
   },
+
+  {
+    "Mofiqul/dracula.nvim",
+    lazy=false,
+    config=function ()
+      --vim.cmd.colorscheme "dracula"
+    end
+  },
+
   {
     "maxmx03/solarized.nvim",
     lazy = false,
