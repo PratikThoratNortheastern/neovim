@@ -27,15 +27,6 @@ M.on_attach = function(client, bufnr)
 	keymap("n", "<leader>ws", "<cmd>FzfLua lsp_workspace_symbols<CR>", opts) -- Search for any workspace symbol
 	keymap("n", "<leader>gi", "<cmd>FzfLua lsp_implementations<CR>", opts) -- Go to implementation
 
-	if client.name == "rust-analyzer" then -- debugging only configured for Rust
-		local dap = require("dap")
-		keymap("n", "<leader>dc", dap.continue, opts) -- Continue / Start
-		keymap("n", "<leader>do", dap.step_over, opts) -- Step over
-		keymap("n", "<leader>di", dap.step_into, opts) -- Step into
-		keymap("n", "<leader>du", dap.step_out, opts) -- Step out
-		keymap("n", "<leader>db", dap.toggle_breakpoint, opts) -- Toggle breakpoint
-		keymap("n", "<leader>dr", dap.repl.open, opts) -- Open DAP REPL
-	end
-end
+ end
 
 return M
