@@ -53,3 +53,63 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines and keep cursor position"
 vim.keymap.set("n", "<leader>m", "<Cmd>NvimTreeFocus<CR>", {desc = "Focus on File Explorer"})
 vim.keymap.set("n", "<leader>e", "<Cmd>NvimTreeToggle<CR>", {desc = "Toggle File Explorer"})
 
+-- java execution keymaps
+local function run_java_dsa()
+ if vim.bo.filetype ~= "java" then
+    vim.notify("Not a Java file (current filetype: " .. vim.bo.filetype .. ")", vim.log.levels.WARN)
+    return
+  end
+
+  vim.cmd("silent! update!")
+
+  local file = vim.fn.expand("%:p")
+  local dir = vim.fn.expand("%:p:h")
+  local classname = vim.fn.expand("%:t:r")
+  local input_file = dir .. "/input.txt"
+  local output_file = dir .. "/output.txt"
+
+  if vim.fn.filereadable(input_file) == 0 then
+    vim.notify("Missing input.txt in " .. dir, vim.log.levels.WARN)
+    return
+  end
+
+  local cmd = string.format(
+    "cd %s && javac %s && java -cp %s %s < %s > %s 2>&1",
+    vim.fn.shellescape(dir),
+    vim.fn.shellescape(file),
+    vim.fn.shellescape(dir),
+    vim.fn.shellescape(classname),
+    vim.fn.shellescape(input_file),
+    vim.fn.shellescape(output_file)
+  )
+
+  vim.fn.system(cmd)
+  vim.cmd("vsplit " .. vim.fn.fnameescape(output_file))
+  -- vim.cmd("write")
+  --
+  -- local file = vim.fn.expand("%:p")
+  -- local dir = vim.fn.expand("%:p:h")
+  -- local classname = vim.fn.expand("%:t:r")
+  -- local input_file = dir .. "/input.txt"
+  -- local output_file = dir .. "/output.txt"
+  --
+  -- if vim.fn.filereadable(input_file) == 0 then
+  --   vim.notify("Missing input.txt in " .. dir, vim.log.levels.WARN)
+  --   return
+  -- end
+  --
+  -- local cmd = string.format(
+  --   "cd %s && javac %s && java -cp %s %s < %s > %s 2>&1",
+  --   vim.fn.shellescape(dir),
+  --   vim.fn.shellescape(file),
+  --   vim.fn.shellescape(dir),
+  --   vim.fn.shellescape(classname),
+  --   vim.fn.shellescape(input_file),
+  --   vim.fn.shellescape(output_file)
+  -- )
+  --
+  -- vim.fn.system(cmd)
+  -- vim.cmd("vsplit " .. vim.fn.fnameescape(output_file))
+end
+
+vim.keymap.set("n", "<leader>jr", run_java_dsa, { desc = "Java: Compile & Run with input.txt" })
