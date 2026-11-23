@@ -4,23 +4,27 @@ return {
 {
 "mfussenegger/nvim-jdtls",
   ft = "java",
-  opts = function(_, opts)
-    opts = opts or {}
-    opts.cmd = opts.cmd or { "jdtls" }
-
-    table.insert(opts.cmd, "--jvm-arg=-Djava.import.generatesMetadataFilesAtProjectRoot=false")
-    table.insert(opts.cmd, "-Xmx2G")
-
-    opts.settings = {
-      java = {
+  opts = {
+    cmd = {
+      "jdtls",
+      "--jvm-arg=-Djava.import.generatesMetadataFilesAtProjectRoot=false",
+      "-Xmx2G",
+    },
+    settings = {
+      java= {
         format = {
           enabled = true,
-          comments = { enabled = false },
+          comments = {enabled = false},
           tabSize = 4,
         },
       },
-    }
-  end,
+    },
+  },
+
+
+  config = function (_,opts)
+    vim.g.jdtls_opts = opts
+  end
 },
 
 
