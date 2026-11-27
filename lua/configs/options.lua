@@ -6,7 +6,7 @@
 -- Basic Settings
 vim.opt.number = true  -- Line numbers
 vim.opt.cursorline = true -- Highlights current line
-vim.opt.shiftwidth = 4 
+vim.opt.shiftwidth = 4
 vim.opt.scrolloff = 10 -- Keep 10 columns above/below of cursor
 vim.opt.sidescrolloff = 8 -- Keep 8 columns left/right of cursor
 vim.opt.wrap = false -- Don't wrap lines

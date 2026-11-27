@@ -4,3 +4,4 @@ require('configs.keymaps')
 require("configs.autocmds")
 require('configs.lazy')
 pcall(require, "current-theme")
+require("bufferline").setup{}
